@@ -61,14 +61,14 @@
                 required
             />
 
-            <div class="flex flex-wrap items-center gap-2">
+            <div class="flex flex-col-reverse gap-2 border-t border-card-border pt-5 sm:flex-row sm:justify-end">
+                <x-ui.button :href="route('settings.edit')" variant="secondary">
+                    {{ __('ui.common.cancel') }}
+                </x-ui.button>
+
                 <x-ui.button type="submit">
                     <x-heroicon-o-check class="size-4" />
                     {{ __('ui.password.save') }}
-                </x-ui.button>
-
-                <x-ui.button :href="route('settings.edit')" variant="secondary">
-                    {{ __('ui.settings.title') }}
                 </x-ui.button>
             </div>
         </form>

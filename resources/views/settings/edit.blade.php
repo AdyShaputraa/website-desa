@@ -65,8 +65,14 @@
                     </div>
                 </div>
 
-                <div class="sm:col-span-2">
-                    <x-ui.button type="submit">{{ __('ui.settings.save') }}</x-ui.button>
+                <div class="flex flex-col-reverse gap-2 border-t border-card-border pt-5 sm:col-span-2 sm:flex-row sm:justify-end">
+                    <x-ui.button :href="route('dashboard')" variant="secondary">
+                        {{ __('ui.common.cancel') }}
+                    </x-ui.button>
+
+                    <x-ui.button type="submit">
+                        {{ __('ui.settings.save') }}
+                    </x-ui.button>
                 </div>
             </form>
         </x-ui.card>
