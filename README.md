@@ -59,6 +59,15 @@ Cek status container:
 docker compose ps
 ```
 
+Dependency `vendor` dan `node_modules` disimpan di named volume Docker agar performa
+lebih baik di Windows. Saat pertama kali menjalankan project atau setelah mengubah
+`composer.json`/`package.json`, jalankan:
+
+```powershell
+docker compose run --rm --no-deps laravel.test composer install
+docker compose run --rm --no-deps laravel.test npm ci
+```
+
 Setelah container berjalan, aplikasi dapat diakses di:
 
 | Layanan | Alamat |
