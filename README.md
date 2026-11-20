@@ -32,6 +32,30 @@ dibangun secara bertahap dari minggu ke minggu.
 | Build Tool | Vite |
 | Package Manager | Composer dan NPM |
 
+## Tampilan Aplikasi
+
+### Login
+
+<img src="assets/screenshots/login.png" alt="Halaman login Portal Desa Digital" width="460">
+
+### Dashboard Admin
+
+<img src="assets/screenshots/dashboard-admin.png" alt="Dashboard admin dengan statistik dan tabel" width="900">
+
+### Manajemen Pengguna
+
+<img src="assets/screenshots/users-management.png" alt="Halaman manajemen pengguna dengan filter dan tabel" width="900">
+
+### Pengaturan
+
+<img src="assets/screenshots/settings.png" alt="Halaman pengaturan akun dan preferensi" width="900">
+
+### Mode Gelap
+
+<img src="assets/screenshots/dashboard-dark.png" alt="Dashboard Portal Desa Digital dalam mode gelap" width="900">
+
+> Screenshot menggunakan data demo.
+
 ## Persyaratan
 
 - Docker (Docker Compose v2)
