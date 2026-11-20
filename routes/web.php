@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,21 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('login');
     })->name('logout');
 });
+
+Route::middleware(['auth', 'role:admin'])
+    ->prefix('users')
+    ->name('users.')
+    ->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/export', [UserController::class, 'export'])->name('export');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::patch('/bulk', [UserController::class, 'bulk'])->name('bulk');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+        Route::post('/{user}/restore', [UserController::class, 'restore'])->name('restore');
+        Route::delete('/{user}/force', [UserController::class, 'forceDelete'])->name('force-delete');
+    });
 
 Route::get('/language/{locale}', LanguageController::class)->name('language.switch');

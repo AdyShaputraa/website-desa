@@ -7,6 +7,15 @@
             'active' => request()->routeIs('dashboard'),
         ],
     ];
+
+    if (auth()->user()?->hasRole('admin')) {
+        $sidebarItems[] = [
+            'label' => __('ui.users.title'),
+            'href' => route('users.index'),
+            'icon' => 'heroicon-o-users',
+            'active' => request()->routeIs('users.*'),
+        ];
+    }
 @endphp
 
 <!DOCTYPE html>
