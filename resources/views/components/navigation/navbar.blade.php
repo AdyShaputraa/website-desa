@@ -8,18 +8,18 @@
             :aria-expanded="$store.sidebar.open.toString()"
             aria-controls="app-sidebar"
             class="focus-ring inline-flex size-10 shrink-0 items-center justify-center rounded-lg border border-card-border bg-card text-foreground transition hover:bg-surface-muted lg:hidden"
-            aria-label="Buka menu navigasi"
+            aria-label="{{ __('ui.nav.open_menu') }}"
         >
             <x-heroicon-o-bars-3 class="size-5" />
         </button>
 
         <div class="min-w-0 flex-1">
             @if ($title)
-                <p class="truncate text-sm font-semibold text-foreground sm:text-base">{{ $title }}</p>
+                <p class="hidden truncate text-sm font-semibold text-foreground sm:block sm:text-base">{{ $title }}</p>
             @endif
 
             @if ($subtitle)
-                <p class="truncate text-xs text-muted-foreground">{{ $subtitle }}</p>
+                <p class="hidden truncate text-xs text-muted-foreground sm:block">{{ $subtitle }}</p>
             @endif
         </div>
 
