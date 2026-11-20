@@ -8,6 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+Route::get('/design-system', function () {
+    abort_unless(app()->isLocal(), 404);
+
+    return view('pages.design-system');
+})->name('design-system');
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('auth.login');
