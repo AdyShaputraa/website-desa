@@ -1,7 +1,7 @@
 const MODES = ['light', 'dark', 'system'];
 const ACCENTS = ['indigo', 'emerald', 'violet', 'rose'];
 const THEME_KEY = 'theme';
-const ACCENT_KEY = 'accent';
+const DEFAULT_ACCENT = 'indigo';
 
 const prefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -14,9 +14,7 @@ export function readMode() {
 }
 
 export function readAccent() {
-    const stored = localStorage.getItem(ACCENT_KEY);
-
-    return ACCENTS.includes(stored) ? stored : 'indigo';
+    return DEFAULT_ACCENT;
 }
 
 export function applyMode(mode) {
@@ -29,7 +27,7 @@ export function applyMode(mode) {
 }
 
 export function applyAccent(accent) {
-    document.documentElement.dataset.accent = ACCENTS.includes(accent) ? accent : 'indigo';
+    document.documentElement.dataset.accent = ACCENTS.includes(accent) ? accent : DEFAULT_ACCENT;
 }
 
 export function registerTheme(Alpine) {
@@ -82,7 +80,6 @@ export function registerTheme(Alpine) {
             }
 
             this.value = accent;
-            localStorage.setItem(ACCENT_KEY, accent);
             applyAccent(accent);
         },
     });
