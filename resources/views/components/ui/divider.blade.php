@@ -1,6 +1,6 @@
 @props(['label' => null])
 
-<div class="flex items-center gap-3" role="separator">
+<div {{ $attributes->merge(['class' => 'flex items-center gap-3']) }} role="separator">
     <span class="h-px flex-1 bg-border"></span>
 
     @if ($label)
