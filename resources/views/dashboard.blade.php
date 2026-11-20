@@ -11,13 +11,7 @@
             :eyebrow="__('ui.dashboard.eyebrow')"
             :title="__('ui.dashboard.welcome', ['name' => auth()->user()->name])"
             :description="__('ui.dashboard.subtitle')"
-        >
-            <x-slot:actions>
-                <x-ui.badge variant="primary">
-                    {{ __('ui.dashboard.role', ['role' => __('ui.dashboard.roles.'.$role)]) }}
-                </x-ui.badge>
-            </x-slot:actions>
-        </x-ui.page-header>
+        />
     </div>
 
     @include('dashboard.'.$role, [
