@@ -13,6 +13,19 @@
             <x-heroicon-o-bars-3 class="size-5" />
         </button>
 
+        <button
+            type="button"
+            x-on:click="$store.sidebar.toggleCollapsed()"
+            :aria-expanded="(! $store.sidebar.collapsed).toString()"
+            aria-controls="app-sidebar"
+            :aria-label="$store.sidebar.collapsed
+                ? '{{ __('ui.nav.expand_sidebar') }}'
+                : '{{ __('ui.nav.collapse_sidebar') }}'"
+            class="focus-ring hidden size-10 shrink-0 items-center justify-center rounded-lg border border-card-border bg-card text-foreground transition hover:bg-surface-muted lg:inline-flex"
+        >
+            <x-heroicon-o-bars-3 class="size-5" />
+        </button>
+
         <div class="min-w-0 flex-1">
             @if ($title)
                 <p class="hidden truncate text-sm font-semibold text-foreground sm:block sm:text-base">{{ $title }}</p>

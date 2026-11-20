@@ -17,6 +17,8 @@ return [
         'close_menu' => 'Tutup menu navigasi',
         'main_navigation' => 'Navigasi utama',
         'skip' => 'Lewati ke konten utama',
+        'expand_sidebar' => 'Perluas sidebar',
+        'collapse_sidebar' => 'Ciutkan sidebar',
     ],
 
     'footer' => [
@@ -41,17 +43,46 @@ return [
         'secure_note' => 'Dengan masuk, Anda menyetujui penggunaan data untuk keperluan layanan desa.',
     ],
 
+    'account' => [
+        'menu' => 'Menu pengguna',
+        'settings' => 'Settings',
+        'change_password' => 'Change Password',
+        'logout' => 'Logout',
+    ],
+
+    'settings' => [
+        'title' => 'Settings',
+        'eyebrow' => 'Akun',
+        'description' => 'Kelola informasi akun dan preferensi tampilan.',
+        'account_info' => 'Informasi akun',
+        'account_info_desc' => 'Nama dan email yang dipakai untuk masuk.',
+        'name' => 'Nama',
+        'email' => 'Email',
+        'role' => 'Peran',
+        'preferences' => 'Preferensi',
+        'preferences_desc' => 'Bahasa dan tema antarmuka.',
+        'save' => 'Simpan perubahan',
+        'saved' => 'Informasi akun berhasil diperbarui.',
+    ],
+
+    'password' => [
+        'title' => 'Change Password',
+        'eyebrow' => 'Keamanan',
+        'description' => 'Ganti password akun Anda secara berkala.',
+        'current' => 'Password saat ini',
+        'new' => 'Password baru',
+        'confirm' => 'Konfirmasi password baru',
+        'save' => 'Simpan password',
+        'saved' => 'Password berhasil diperbarui.',
+        'min_hint' => 'Minimal 8 karakter.',
+        'google_hint' => 'Akun ini terhubung dengan Google. Isi password lama bila pernah diatur; jika tidak, Anda tetap bisa masuk lewat Google.',
+    ],
+
     'dashboard' => [
         'title' => 'Dashboard',
         'eyebrow' => 'Ringkasan',
         'welcome' => 'Selamat datang, :name',
         'subtitle' => 'Ringkasan aktivitas pelayanan desa.',
-        'role' => 'Peran: :role',
-        'roles' => [
-            'admin' => 'Administrator',
-            'staff' => 'Staff',
-            'warga' => 'Warga',
-        ],
     ],
 
     'stats' => [

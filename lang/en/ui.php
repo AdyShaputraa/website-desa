@@ -17,6 +17,8 @@ return [
         'close_menu' => 'Close navigation menu',
         'main_navigation' => 'Main navigation',
         'skip' => 'Skip to main content',
+        'expand_sidebar' => 'Expand sidebar',
+        'collapse_sidebar' => 'Collapse sidebar',
     ],
 
     'footer' => [
@@ -41,17 +43,46 @@ return [
         'secure_note' => 'By signing in, you agree to the use of your data for village services.',
     ],
 
+    'account' => [
+        'menu' => 'User menu',
+        'settings' => 'Settings',
+        'change_password' => 'Change Password',
+        'logout' => 'Logout',
+    ],
+
+    'settings' => [
+        'title' => 'Settings',
+        'eyebrow' => 'Account',
+        'description' => 'Manage your account information and display preferences.',
+        'account_info' => 'Account information',
+        'account_info_desc' => 'The name and email used to sign in.',
+        'name' => 'Name',
+        'email' => 'Email',
+        'role' => 'Role',
+        'preferences' => 'Preferences',
+        'preferences_desc' => 'Interface language and theme.',
+        'save' => 'Save changes',
+        'saved' => 'Account information updated.',
+    ],
+
+    'password' => [
+        'title' => 'Change Password',
+        'eyebrow' => 'Security',
+        'description' => 'Update your account password regularly.',
+        'current' => 'Current password',
+        'new' => 'New password',
+        'confirm' => 'Confirm new password',
+        'save' => 'Save password',
+        'saved' => 'Password updated.',
+        'min_hint' => 'At least 8 characters.',
+        'google_hint' => 'This account is linked to Google. Enter the current password if you have set one; otherwise you can keep signing in with Google.',
+    ],
+
     'dashboard' => [
         'title' => 'Dashboard',
         'eyebrow' => 'Overview',
         'welcome' => 'Welcome, :name',
         'subtitle' => 'A summary of village service activity.',
-        'role' => 'Role: :role',
-        'roles' => [
-            'admin' => 'Administrator',
-            'staff' => 'Staff',
-            'warga' => 'Resident',
-        ],
     ],
 
     'stats' => [

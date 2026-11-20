@@ -30,7 +30,7 @@
             {{ __('ui.nav.skip') }}
         </a>
 
-        <div class="lg:grid lg:min-h-screen lg:grid-cols-[16rem_minmax(0,1fr)]">
+        <div class="app-shell lg:grid lg:min-h-screen lg:grid-cols-[16rem_minmax(0,1fr)]">
             <x-navigation.mobile-drawer>
                 <x-navigation.sidebar :items="$sidebarItems" />
             </x-navigation.mobile-drawer>
@@ -39,22 +39,11 @@
                 <x-navigation.navbar :title="View::yieldContent('title')">
                     <x-ui.language-switcher />
                     <x-ui.theme-toggle />
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-ui.button
-                            type="submit"
-                            variant="outline"
-                            size="icon"
-                            aria-label="{{ __('ui.nav.logout') }}"
-                        >
-                            <x-heroicon-o-arrow-right-on-rectangle class="size-5" />
-                        </x-ui.button>
-                    </form>
+                    <x-ui.user-menu />
                 </x-navigation.navbar>
 
                 <main id="main-content" class="flex-1">
-                    <div class="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+                    <div class="w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 2xl:px-10">
                         @yield('content')
                     </div>
                 </main>

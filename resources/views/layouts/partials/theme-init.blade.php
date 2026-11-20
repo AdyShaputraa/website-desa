@@ -10,6 +10,7 @@
             root.classList.toggle('dark', isDark);
             root.dataset.theme = mode;
             root.dataset.accent = 'indigo';
+            root.dataset.sidebarCollapsed = localStorage.getItem('sidebar_collapsed') === '1' ? 'true' : 'false';
             root.style.colorScheme = isDark ? 'dark' : 'light';
         } catch (error) {
             // localStorage dapat diblokir; biarkan tema default.

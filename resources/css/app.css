@@ -303,3 +303,24 @@
 [x-cloak] {
     display: none !important;
 }
+
+/* Collapse sidebar desktop: ikon saja, label disembunyikan. */
+@media (min-width: 1024px) {
+    html[data-sidebar-collapsed='true'] .app-shell {
+        grid-template-columns: 5rem minmax(0, 1fr);
+    }
+
+    html[data-sidebar-collapsed='true'] .sidebar-label {
+        display: none;
+    }
+
+    html[data-sidebar-collapsed='true'] .sidebar-link {
+        justify-content: center;
+        gap: 0;
+        padding-inline: 0.75rem;
+    }
+
+    html[data-sidebar-collapsed='true'] .sidebar-brand {
+        justify-content: center;
+    }
+}

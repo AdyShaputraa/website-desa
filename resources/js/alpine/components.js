@@ -1,11 +1,33 @@
 export function registerComponents(Alpine) {
+    const SIDEBAR_COLLAPSED_KEY = 'sidebar_collapsed';
+
+    const readSidebarCollapsed = () => {
+        try {
+            return localStorage.getItem(SIDEBAR_COLLAPSED_KEY) === '1';
+        } catch (error) {
+            return false;
+        }
+    };
+
     Alpine.store('sidebar', {
         open: false,
+        collapsed: readSidebarCollapsed(),
         toggle() {
             this.open = !this.open;
         },
         close() {
             this.open = false;
+        },
+        toggleCollapsed() {
+            this.collapsed = !this.collapsed;
+
+            try {
+                localStorage.setItem(SIDEBAR_COLLAPSED_KEY, this.collapsed ? '1' : '0');
+            } catch (error) {
+                // localStorage dapat diblokir; state tetap berlaku selama halaman terbuka.
+            }
+
+            document.documentElement.dataset.sidebarCollapsed = this.collapsed ? 'true' : 'false';
         },
     });
 
