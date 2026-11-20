@@ -8,9 +8,9 @@
     x-data="dropdown"
     @click.outside="close()"
     @keydown.escape="close()"
-    class="relative"
+    class="relative inline-flex"
 >
-    <div @click="toggle()">
+    <div class="inline-flex" @click="toggle()">
         {{ $trigger }}
     </div>
 
