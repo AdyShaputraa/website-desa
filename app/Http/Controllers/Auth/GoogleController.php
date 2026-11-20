@@ -30,8 +30,16 @@ class GoogleController extends Controller
                 ->withErrors(['google' => __('ui.auth.google_failed')]);
         }
 
-        $user = User::where('google_id', $googleUser->getId())->first()
-            ?? User::where('email', $googleUser->getEmail())->first();
+        $user = User::withTrashed()
+            ->where('google_id', $googleUser->getId())
+            ->orWhere('email', $googleUser->getEmail())
+            ->first();
+
+        if ($user && ($user->trashed() || ! $user->is_active)) {
+            return redirect()
+                ->route('login')
+                ->withErrors(['google' => __('ui.auth.inactive')]);
+        }
 
         if ($user) {
             $user->fill([
