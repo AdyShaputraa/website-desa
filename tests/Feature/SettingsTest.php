@@ -74,4 +74,22 @@ class SettingsTest extends TestCase
             'email' => 'saya@example.com',
         ]);
     }
+
+    public function test_validation_messages_follow_locale(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->from('/settings')
+            ->patch('/settings', [
+                'name' => '',
+                'email' => 'bukan-email',
+            ])
+            ->assertSessionHasErrors(['name', 'email']);
+
+        $errors = session('errors');
+
+        $this->assertStringContainsString('wajib diisi', $errors->first('name'));
+        $this->assertStringContainsString('alamat email yang valid', $errors->first('email'));
+    }
 }

@@ -50,4 +50,33 @@ class LocalizationTest extends TestCase
             ->assertSee('Total residents')
             ->assertSee('Latest requests');
     }
+
+    public function test_account_pages_are_fully_translated(): void
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->get('/settings')
+            ->assertOk()
+            ->assertSee('Pengaturan')
+            ->assertSee('Ubah Password');
+
+        $this->actingAs($user)
+            ->get('/password')
+            ->assertOk()
+            ->assertSee('Ubah Password');
+
+        $this->withSession(['locale' => 'en'])
+            ->actingAs($user)
+            ->get('/settings')
+            ->assertOk()
+            ->assertSee('Settings')
+            ->assertSee('Change Password');
+
+        $this->withSession(['locale' => 'en'])
+            ->actingAs($user)
+            ->get('/password')
+            ->assertOk()
+            ->assertSee('Change Password');
+    }
 }
