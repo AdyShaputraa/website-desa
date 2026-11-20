@@ -304,6 +304,11 @@
     display: none !important;
 }
 
+button:not(:disabled),
+[role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+}
+
 /* Collapse sidebar desktop: ikon saja, label disembunyikan. */
 @media (min-width: 1024px) {
     html[data-sidebar-collapsed='true'] .app-shell {
