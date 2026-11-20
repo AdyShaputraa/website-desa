@@ -39,6 +39,7 @@
                 <x-navigation.navbar :title="View::yieldContent('title')">
                     <x-ui.language-switcher />
                     <x-ui.theme-toggle />
+                    <span class="h-6 w-px shrink-0 bg-border" aria-hidden="true"></span>
                     <x-ui.user-menu />
                 </x-navigation.navbar>
 
@@ -48,8 +49,8 @@
                     </div>
                 </main>
 
-                <footer class="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground sm:px-6 lg:px-8">
-                    <p>&copy; {{ date('Y') }} {{ __('ui.footer.credit') }}</p>
+                <footer class="border-t border-border px-4 py-4 text-left text-xs text-muted-foreground sm:px-6 lg:px-8">
+                    <p>{{ __('ui.footer.credit') }} &copy; {{ date('Y') }}</p>
                 </footer>
             </div>
         </div>

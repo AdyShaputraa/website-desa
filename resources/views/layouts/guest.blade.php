@@ -24,7 +24,7 @@
         </main>
 
         <footer class="border-t border-border px-4 py-4 text-center text-xs text-muted-foreground">
-            <p>&copy; {{ date('Y') }} {{ __('ui.footer.credit') }}</p>
+            <p>{{ __('ui.footer.credit') }} &copy; {{ date('Y') }}</p>
         </footer>
 
         <x-feedback.toast-container />
