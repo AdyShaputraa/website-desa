@@ -1,5 +1,6 @@
-import $ from 'jquery';
-import * as bootstrap from 'bootstrap';
+import '@fontsource-variable/plus-jakarta-sans';
+import Alpine from 'alpinejs';
 
-window.$ = window.jQuery = $;
-window.bootstrap = bootstrap;
+window.Alpine = Alpine;
+
+Alpine.start();

@@ -17,9 +17,11 @@ aplikasi, dan menjalankan perintah di dalam container Docker.
 | Web Server | Laravel Sail |
 | Container | Docker Desktop |
 | Template | Blade |
-| CSS Framework | Bootstrap 5 |
-| JavaScript | jQuery 3 |
-| Asset Bundler | Vite |
+| CSS Framework | Tailwind CSS 4 |
+| JavaScript | Alpine.js 3 |
+| Font | Plus Jakarta Sans (Fontsource) |
+| Ikon | Heroicons (Blade UI Kit) |
+| Build Tool | Vite + PostCSS |
 | Package Manager | Composer dan NPM |
 
 ## Persyaratan
@@ -280,14 +282,15 @@ docker compose exec mysql mysql -usail -ppassword website_desa -e "SELECT TABLE_
 | `laravel/framework` | Framework Laravel 13 |
 | `laravel/tinker` | REPL untuk verifikasi data |
 | `laravel/sail` | Lingkungan Docker (PHP 8.4, MySQL 8.4) |
-| `laravel/socialite` | Persiapan login Google OAuth |
+| `laravel/socialite` | Login Google OAuth |
 | `spatie/laravel-permission` | Role dan permission |
 | `barryvdh/laravel-dompdf` | Pembuatan PDF (surat) |
+| `blade-ui-kit/blade-heroicons` | Komponen ikon Heroicons untuk Blade |
 
 Instalasi package (dijalankan sekali saat setup):
 
 ```powershell
-docker compose exec laravel.test composer require laravel/socialite spatie/laravel-permission barryvdh/laravel-dompdf
+docker compose exec laravel.test composer require laravel/socialite spatie/laravel-permission barryvdh/laravel-dompdf blade-ui-kit/blade-heroicons
 ```
 
 Publish konfigurasi dan migration Spatie:
@@ -343,13 +346,118 @@ $middleware->alias([
 
 ## Frontend
 
-Bootstrap 5 dan jQuery diimpor melalui `resources/css/app.css` dan `resources/js/app.js`,
-lalu dimuat di Blade dengan `@vite`. Tidak ada CDN, sehingga tidak ada pemuatan ganda.
+Aset frontend dikelola dengan Vite, Tailwind CSS 4, dan PostCSS. Semua aset dimuat
+lewat `@vite` di Blade, tanpa CDN.
 
-- `resources/css/app.css` mengimpor `bootstrap` dan `bootstrap-icons`.
-- `resources/js/app.js` mengimpor `jquery` dan JavaScript `bootstrap`, lalu mendaftarkannya
-  ke `window.$`, `window.jQuery`, dan `window.bootstrap`.
+- `resources/css/app.css` mengimpor `tailwindcss`, mendefinisikan font default lewat
+  `@theme`, dan menambahkan aturan `[x-cloak]`.
+- `resources/js/app.js` mengimpor font Fontsource dan menjalankan Alpine.js.
+- `postcss.config.js` mendaftarkan plugin `@tailwindcss/postcss` dan `autoprefixer`.
 - `vite.config.js` mengelola input `resources/css/app.css` dan `resources/js/app.js`.
+
+Tailwind CSS 4 tidak memakai `tailwind.config.js`. Kustomisasi tema dilakukan di CSS:
+
+```css
+@import 'tailwindcss';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+```
+
+Font Plus Jakarta Sans berasal dari package Fontsource dan diimpor di `app.js`:
+
+```js
+import '@fontsource-variable/plus-jakarta-sans';
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+Alpine.start();
+```
+
+Interaktivitas halaman memakai Alpine.js, misalnya:
+
+```blade
+<div x-data="{ tampil: true }">
+    <button type="button" @click="tampil = !tampil">Toggle</button>
+    <p x-show="tampil" x-cloak>Konten</p>
+</div>
+```
+
+Ikon memakai komponen Heroicons:
+
+```blade
+<x-heroicon-o-check-circle class="size-5 text-emerald-600" />
+```
+
+Komponen Heroicons membutuhkan manifest ikon di `bootstrap/cache/blade-icons.php`.
+Manifest tersebut dibuat otomatis oleh `scripts/cache-blade-icons.php` setiap kali
+`composer install`, `composer update`, atau `composer dump-autoload` dijalankan.
+
+> Di Docker Desktop untuk Windows, `php artisan icons:cache` dapat menghasilkan
+> manifest yang tidak lengkap karena `DirectoryIterator` PHP melewatkan sebagian file
+> pada bind mount. Jika muncul error `Unable to locate a class or view for component
+> [heroicon-...]`, jalankan `composer dump-autoload` di dalam container.
+
+Halaman verifikasi di `/` menampilkan versi Laravel, PHP, Tailwind, Alpine, dan font,
+sehingga dapat dipakai untuk memastikan seluruh aset frontend termuat.
+
+## Login Google OAuth
+
+Login memakai `laravel/socialite` dengan driver Google. Credential dibaca dari `.env`
+melalui `config/services.php`.
+
+### Konfigurasi Google Cloud Console
+
+1. Buat OAuth Client ID bertipe **Web application**.
+2. Tambahkan **Authorized redirect URI** persis seperti nilai `GOOGLE_REDIRECT_URI`:
+   `http://localhost:8081/auth/google/callback`.
+3. Salin Client ID dan Client Secret ke `.env`:
+
+```env
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+GOOGLE_REDIRECT_URI=http://localhost:8081/auth/google/callback
+```
+
+Redirect URI harus sama persis, termasuk skema, host, port, dan path. Jika berbeda,
+Google akan menolak proses login.
+
+### Route
+
+| Method | URI | Nama | Fungsi |
+|---|---|---|---|
+| GET | `/login` | `login` | Halaman login |
+| GET | `/auth/google/redirect` | `auth.google` | Mengarahkan ke halaman persetujuan Google |
+| GET | `/auth/google/callback` | `auth.google.callback` | Menerima callback dari Google |
+| POST | `/logout` | `logout` | Keluar dari sesi |
+
+### Alur Callback
+
+`app/Http/Controllers/Auth/GoogleController.php` menangani proses login:
+
+1. Mengambil data pengguna dari Google.
+2. Mencari user berdasarkan `google_id`, lalu berdasarkan `email`.
+3. Jika user sudah ada, `google_id` dan `avatar` diperbarui.
+4. Jika belum ada, user baru dibuat dengan role `warga` dan `email_verified_at` diisi.
+5. User diarahkan ke halaman utama.
+
+Karena kolom `users.password` bersifat `NOT NULL`, akun yang dibuat lewat Google diberi
+password acak. Akun tersebut tetap bisa login ulang lewat Google.
+
+Perintah terkait:
+
+```powershell
+docker compose exec laravel.test php artisan route:list --except-vendor
+docker compose exec laravel.test php artisan package:discover
+```
+
+`package:discover` perlu dijalankan setelah menambah package Composer baru agar
+komponen Heroicons dan service provider lain terdaftar.
 
 ## Setup Pertama Kali
 
