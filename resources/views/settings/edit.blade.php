@@ -32,7 +32,7 @@
                 <p class="mt-0.5 text-sm text-muted-foreground">{{ __('ui.settings.account_info_desc') }}</p>
             </x-slot:header>
 
-            <form method="POST" action="{{ route('settings.update') }}" class="grid gap-5 sm:grid-cols-2">
+            <form id="settings-form" method="POST" action="{{ route('settings.update') }}" class="grid gap-5 sm:grid-cols-2">
                 @csrf
                 @method('patch')
 
@@ -64,17 +64,19 @@
                         @endforelse
                     </div>
                 </div>
+            </form>
 
-                <div class="flex flex-col-reverse gap-2 border-t border-card-border pt-5 sm:col-span-2 sm:flex-row sm:justify-end">
+            <x-slot:footer>
+                <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                     <x-ui.button :href="route('dashboard')" variant="secondary">
                         {{ __('ui.common.cancel') }}
                     </x-ui.button>
 
-                    <x-ui.button type="submit">
+                    <x-ui.button type="submit" form="settings-form">
                         {{ __('ui.settings.save') }}
                     </x-ui.button>
                 </div>
-            </form>
+            </x-slot:footer>
         </x-ui.card>
 
         <div class="space-y-6">

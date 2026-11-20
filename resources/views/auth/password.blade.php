@@ -30,7 +30,7 @@
     @endif
 
     <x-ui.card class="mt-6 max-w-xl">
-        <form method="POST" action="{{ route('password.update') }}" class="space-y-5">
+        <form id="password-form" method="POST" action="{{ route('password.update') }}" class="space-y-5">
             @csrf
             @method('put')
 
@@ -60,17 +60,19 @@
                 autocomplete="new-password"
                 required
             />
+        </form>
 
-            <div class="flex flex-col-reverse gap-2 border-t border-card-border pt-5 sm:flex-row sm:justify-end">
+        <x-slot:footer>
+            <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
                 <x-ui.button :href="route('settings.edit')" variant="secondary">
                     {{ __('ui.common.cancel') }}
                 </x-ui.button>
 
-                <x-ui.button type="submit">
+                <x-ui.button type="submit" form="password-form">
                     <x-heroicon-o-check class="size-4" />
                     {{ __('ui.password.save') }}
                 </x-ui.button>
             </div>
-        </form>
+        </x-slot:footer>
     </x-ui.card>
 @endsection
