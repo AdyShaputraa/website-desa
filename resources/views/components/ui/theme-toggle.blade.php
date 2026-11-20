@@ -1,23 +1,28 @@
 @props([])
 
+@php
+    $options = [
+        ['value' => 'light', 'label' => __('ui.nav.theme_light'), 'icon' => 'heroicon-o-sun'],
+        ['value' => 'dark', 'label' => __('ui.nav.theme_dark'), 'icon' => 'heroicon-o-moon'],
+        ['value' => 'system', 'label' => __('ui.nav.theme_system'), 'icon' => 'heroicon-o-computer-desktop'],
+    ];
+@endphp
+
 <x-ui.dropdown align="right" width="w-48">
     <x-slot:trigger>
         <button
             type="button"
             class="focus-ring inline-flex size-10 items-center justify-center rounded-lg border border-card-border bg-card text-foreground transition hover:bg-surface-muted"
             :aria-expanded="open"
-            aria-label="Ganti tema"
+            aria-haspopup="menu"
+            aria-label="{{ __('ui.nav.theme') }}"
         >
             <x-heroicon-o-sun class="size-5 dark:hidden" />
             <x-heroicon-o-moon class="hidden size-5 dark:block" />
         </button>
     </x-slot:trigger>
 
-    @foreach ([
-        ['value' => 'light', 'label' => 'Light', 'icon' => 'heroicon-o-sun'],
-        ['value' => 'dark', 'label' => 'Dark', 'icon' => 'heroicon-o-moon'],
-        ['value' => 'system', 'label' => 'System', 'icon' => 'heroicon-o-computer-desktop'],
-    ] as $option)
+    @foreach ($options as $option)
         <button
             type="button"
             role="menuitemradio"
