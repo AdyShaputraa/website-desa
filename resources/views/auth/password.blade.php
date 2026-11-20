@@ -9,14 +9,6 @@
         ['label' => __('ui.password.title')],
     ]" />
 
-    <div class="mt-4">
-        <x-ui.page-header
-            :eyebrow="__('ui.password.eyebrow')"
-            :title="__('ui.password.title')"
-            :description="__('ui.password.description')"
-        />
-    </div>
-
     @if (session('status'))
         <x-ui.alert variant="success" class="mt-6">
             {{ session('status') }}
