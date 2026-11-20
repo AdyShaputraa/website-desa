@@ -15,7 +15,7 @@
             class="focus-ring inline-flex h-10 items-center gap-1.5 rounded-lg border border-card-border bg-card px-2.5 text-foreground transition hover:bg-surface-muted"
             :aria-expanded="open"
             aria-haspopup="menu"
-            aria-label="{{ __('ui.nav.language') }}"
+            aria-label="{{ __('ui.nav.language') }}: {{ strtoupper($current) }}"
         >
             <x-heroicon-o-language class="size-5" />
             <span @class(['text-xs font-semibold uppercase', 'hidden sm:inline' => ! $label])>{{ $current }}</span>

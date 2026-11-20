@@ -128,6 +128,7 @@ return [
         'empty' => 'No users found',
         'empty_desc' => 'Try changing the keyword or filter.',
         'count' => ':count users',
+        'select' => 'Select',
         'selected' => 'selected',
         'per_page' => 'Rows',
         'yes' => 'Yes',

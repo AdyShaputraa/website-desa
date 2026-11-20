@@ -2,12 +2,16 @@
 
 <div class="flex h-full flex-col border-r border-sidebar-border bg-sidebar">
     <div class="flex h-16 shrink-0 items-center gap-3 border-b border-sidebar-border px-4">
-        <a href="{{ route('dashboard') }}" class="sidebar-brand focus-ring flex min-w-0 items-center gap-3 rounded-lg">
+        <a
+            href="{{ route('dashboard') }}"
+            class="sidebar-brand focus-ring flex min-w-0 items-center gap-3 rounded-lg"
+            aria-label="{{ __('ui.app.name') }}"
+        >
             <span
-                class="grid size-9 shrink-0 place-items-center rounded-lg bg-primary text-xs font-bold text-primary-foreground"
+                class="grid size-9 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground"
                 aria-hidden="true"
             >
-                PD
+                <x-heroicon-o-building-office-2 class="size-5" />
             </span>
 
             <span class="sidebar-label min-w-0">

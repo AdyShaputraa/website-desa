@@ -150,7 +150,7 @@
                     <x-ui.table
                         :caption="__('ui.users.title')"
                         :headers="[
-                            '',
+                            __('ui.users.select'),
                             __('ui.users.name'),
                             __('ui.users.roles'),
                             __('ui.users.status'),
@@ -203,7 +203,16 @@
                                 <td class="px-4 py-3">
                                     <div class="flex items-center gap-3">
                                         @if ($user->avatar)
-                                            <img src="{{ $user->avatar }}" alt="" class="size-9 rounded-full object-cover" referrerpolicy="no-referrer" />
+                <img
+                    src="{{ $user->avatar }}"
+                    alt=""
+                    class="size-9 rounded-full object-cover"
+                    width="36"
+                    height="36"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                />
                                         @else
                                             <span class="grid size-9 shrink-0 place-items-center rounded-full bg-primary-soft text-xs font-semibold text-primary-soft-foreground">
                                                 {{ $initials ?: '?' }}

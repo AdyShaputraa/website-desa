@@ -18,13 +18,16 @@
             class="focus-ring inline-flex size-10 items-center justify-center overflow-hidden rounded-full border border-card-border bg-surface-muted text-sm font-semibold text-foreground transition hover:ring-2 hover:ring-ring/30"
             :aria-expanded="open"
             aria-haspopup="menu"
-            aria-label="{{ __('ui.account.menu') }}"
+            aria-label="{{ __('ui.account.menu') }} {{ $initials }}"
         >
             @if ($user?->avatar)
                 <img
                     src="{{ $user->avatar }}"
                     alt=""
                     class="size-full object-cover"
+                    width="40"
+                    height="40"
+                    decoding="async"
                     referrerpolicy="no-referrer"
                     x-show="! avatarFailed"
                     x-on:error="avatarFailed = true"

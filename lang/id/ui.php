@@ -128,6 +128,7 @@ return [
         'empty' => 'Tidak ada pengguna',
         'empty_desc' => 'Coba ubah kata kunci atau filter.',
         'count' => ':count pengguna',
+        'select' => 'Pilih',
         'selected' => 'dipilih',
         'per_page' => 'Baris',
         'yes' => 'Ya',
