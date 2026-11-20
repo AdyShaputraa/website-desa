@@ -36,7 +36,7 @@ dibangun secara bertahap dari minggu ke minggu.
 
 ### Login
 
-<img src="assets/screenshots/login.png" alt="Halaman login Portal Desa Digital" width="460">
+<img src="assets/screenshots/login.png" alt="Halaman login Portal Desa Digital" width="900">
 
 ### Dashboard Admin
 
