@@ -4,6 +4,17 @@ Portal Desa Digital adalah aplikasi web untuk pengelolaan informasi dan layanan 
 Project ini dikembangkan sebagai bagian dari mata kuliah **Pemrograman Web** dan
 dibangun secara bertahap dari minggu ke minggu.
 
+## Informasi Mahasiswa
+
+| Keterangan | Data |
+|---|---|
+| Nama | Ady Shaputra |
+| NIM | 17241002 |
+| Kelas | TI.5B |
+| Program Studi | Teknik Informatika |
+| Fakultas | Teknologi Informasi |
+| Universitas | Adhirajasa Reswara Sanjaya |
+
 ## Technology Stack
 
 | Komponen | Teknologi |
@@ -12,7 +23,7 @@ dibangun secara bertahap dari minggu ke minggu.
 | PHP | PHP 8.4 (Docker) |
 | Database | MySQL 8.4 |
 | Web Server | Laravel Sail |
-| Container | Docker Desktop |
+| Container | Docker |
 | Template | Blade |
 | CSS Framework | Tailwind CSS 4 |
 | JavaScript | Alpine.js 3 |
@@ -23,8 +34,8 @@ dibangun secara bertahap dari minggu ke minggu.
 
 ## Persyaratan
 
-- Docker Desktop (Docker Compose v2)
-- Git (opsional)
+- Docker (Docker Compose v2)
+- Git
 - Browser modern
 
 PHP, Composer, dan Node.js **tidak perlu** dipasang di Windows. Semua perintah
@@ -61,10 +72,3 @@ Setelah container berjalan, aplikasi dapat diakses di:
 ```powershell
 docker compose down
 ```
-
-Data MySQL tetap tersimpan di volume `sail-mysql`. **Jangan** menjalankan
-`docker compose down -v` kecuali memang ingin menghapus seluruh data database.
-
-> Dokumentasi pengembangan lengkap (setup, perintah container, database, OAuth,
-> design system, dan troubleshooting) tersimpan secara lokal di folder `docs/`.
-> Folder tersebut tidak di-commit ke repository.
