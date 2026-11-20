@@ -22,7 +22,11 @@ return [
     ],
 
     'footer' => [
-        'credit' => 'Made by Ady Shaputra - 17241002 - TI.5B',
+        'credit' => 'Ady Shaputra - 17241002 - TI.5B',
+    ],
+
+    'common' => [
+        'cancel' => 'Batal',
     ],
 
     'auth' => [
@@ -45,13 +49,13 @@ return [
 
     'account' => [
         'menu' => 'Menu pengguna',
-        'settings' => 'Settings',
-        'change_password' => 'Change Password',
-        'logout' => 'Logout',
+        'settings' => 'Pengaturan',
+        'change_password' => 'Ubah Password',
+        'logout' => 'Keluar',
     ],
 
     'settings' => [
-        'title' => 'Settings',
+        'title' => 'Pengaturan',
         'eyebrow' => 'Akun',
         'description' => 'Kelola informasi akun dan preferensi tampilan.',
         'account_info' => 'Informasi akun',
@@ -66,7 +70,7 @@ return [
     ],
 
     'password' => [
-        'title' => 'Change Password',
+        'title' => 'Ubah Password',
         'eyebrow' => 'Keamanan',
         'description' => 'Ganti password akun Anda secara berkala.',
         'current' => 'Password saat ini',

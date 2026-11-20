@@ -22,7 +22,11 @@ return [
     ],
 
     'footer' => [
-        'credit' => 'Made by Ady Shaputra - 17241002 - TI.5B',
+        'credit' => 'Ady Shaputra - 17241002 - TI.5B',
+    ],
+
+    'common' => [
+        'cancel' => 'Cancel',
     ],
 
     'auth' => [
