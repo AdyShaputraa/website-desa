@@ -1,23 +1,23 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LanguageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check()
+        ? redirect()->route('dashboard')
+        : redirect()->route('login');
 })->name('home');
 
-Route::get('/design-system', function () {
-    abort_unless(app()->isLocal(), 404);
-
-    return view('pages.design-system');
-})->name('design-system');
-
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
-        return view('auth.login');
-    })->name('login');
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])
+        ->middleware('throttle:6,1')
+        ->name('auth.login');
 
     Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('auth.google');
 });
@@ -25,11 +25,17 @@ Route::middleware('guest')->group(function () {
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])
     ->name('auth.google.callback');
 
-Route::post('/logout', function () {
-    Auth::logout();
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
+    Route::post('/logout', function () {
+        Auth::logout();
 
-    return redirect()->route('home');
-})->middleware('auth')->name('logout');
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect()->route('login');
+    })->name('logout');
+});
+
+Route::get('/language/{locale}', LanguageController::class)->name('language.switch');

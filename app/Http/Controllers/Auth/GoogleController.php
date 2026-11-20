@@ -27,7 +27,7 @@ class GoogleController extends Controller
 
             return redirect()
                 ->route('login')
-                ->withErrors(['google' => 'Login dengan Google gagal. Silakan coba lagi.']);
+                ->withErrors(['google' => __('ui.auth.google_failed')]);
         }
 
         $user = User::where('google_id', $googleUser->getId())->first()
@@ -60,6 +60,6 @@ class GoogleController extends Controller
 
         Auth::login($user, remember: true);
 
-        return redirect()->intended(route('home'));
+        return redirect()->intended(route('dashboard'));
     }
 }
